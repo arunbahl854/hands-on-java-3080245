@@ -39,7 +39,27 @@ public class DataSource {
     return customer;
   }
 
+  public static Account getAccount(int account_id) {
+    String sql = "Select * from Accounts where id = ?";
+    Account account = null;
+
+    try {
+      Connection connection = connect();
+      PreparedStatement stmt = connection.prepareStatement(sql);
+      stmt.setInt(1, account_id);
+      ResultSet resultSet = stmt.executeQuery();
+      account = new Account(resultSet.getInt("id"),
+          resultSet.getString("type"),
+          resultSet.getDouble("balance"));
+
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    return account;
+  }
+
   public static void main(String[] args) {
     System.out.println(getCustomer("twest8o@friendfeed.com").getName());
+    System.out.println(getAccount(10385).getBalance());
   }
 }
