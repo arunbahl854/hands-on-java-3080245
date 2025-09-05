@@ -19,11 +19,11 @@ public class Authenticated {
         customer.setAuthenticated(false);
         throw new LoginException("Password did not match")
      }
-     return true; 
+     
   }
 
-  public static void logoff(Customer customer) {
-    customer.setAuthenticated(false);
-  }
+   public static void logoff(Customer customer) {
+      customer.setAuthenticated(false);
+   }
 
 }
