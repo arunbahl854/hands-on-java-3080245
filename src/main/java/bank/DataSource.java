@@ -58,6 +58,18 @@ public class DataSource {
     return account;
   }
 
+  public static void updateAccountBalance(int account_id, double balance) {
+    String sql = "update accounts set balance = ? where id = ?";
+    try (Connection connection = connect();
+        PreparedStatement stmt = connection.prepareStatement(sql);) {
+      stmt.setDouble(1, balance);
+      stmt.setInt(2, account_id);
+      stmt.executeUpdate();
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+  }
+
   public static void main(String[] args) {
     System.out.println(getCustomer("twest8o@friendfeed.com").getName());
     System.out.println(getAccount(10385).getBalance());

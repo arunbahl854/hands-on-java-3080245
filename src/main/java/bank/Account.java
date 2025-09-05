@@ -38,24 +38,24 @@ public class Account {
     this.balance = balance;
   }
 
-  public void deposit(double amount) throws AmountException{
-    if(amount < 1)
-    {
-       throw new AmountException("Minimum amount to withdraw is 1.00")    
+  public void deposit(double amount) throws AmountException {
+    if (amount < 1) {
+      throw new AmountException("Minimum amount to withdraw is 1.00");
     }
     double newbalance = balance + amount;
     balance = newbalance;
+    DataSource.updateAccountBalance(id, balance);
     System.out.println("new balance is" + balance);
   }
 
-  public void withdraw(double amount) throws AmountException{
-    
-    if(amount < 1)
-    {
-       throw new AmountException("Minimum amount to withdraw is 1.00")    
+  public void withdraw(double amount) throws AmountException {
+
+    if (amount < 1) {
+      throw new AmountException("Minimum amount to withdraw is 1.00");
     }
     double newbalance = balance - amount;
     balance = newbalance;
+    DataSource.updateAccountBalance(id, balance);
     System.out.println("new balance is" + balance);
   }
 
